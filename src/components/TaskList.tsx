@@ -21,23 +21,17 @@ export function TaskList() {
         title: newTaskTitle,
         isComplete: false
       };
-      setTasks([...tasks, task]);
+      setTasks(tasks => [...tasks, task]);
       setNewTaskTitle('');
     }
   }
 
   function handleToggleTaskCompletion(id: number) {
-    setTasks(tasks.map(task => {
-      if(task.id === id) {
-        task.isComplete = !task.isComplete;
-      }
-
-      return task;
-    }))
+    setTasks(tasks =>  tasks.map(task =>  task.id === id ? {...task, isComplete: !task.isComplete } : task))
   }
 
   function handleRemoveTask(id: number) {
-    setTasks(tasks.filter(task => task.id !== id))
+    setTasks(tasks => tasks.filter(task => task.id !== id))
   }
 
   return (
